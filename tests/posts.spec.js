@@ -26,7 +26,7 @@ test('GET single post returns correct data', async ({ request }) => {
     expect(body).toHaveProperty('userId');
 });
 
-test('POST creates a new post', async ({ request }) => {
+test('POST creates a new post and returns 201 with id', async ({ request }) => {
     const response = await request.post(`${BASE_URL}/posts`, {
         data: {
             title: 'Test Post',
