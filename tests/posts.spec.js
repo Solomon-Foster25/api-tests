@@ -56,4 +56,20 @@ test.describe('Posts API', () => {
 
         expect([400, 201]).toContain(response.status());    
     });
+
+    test('PUT updates a post and returns updated data', async ({ request }) => {
+        const response = await request.put(`${BASE_URL}/posts/1`, {
+            data: {
+                id: 1,
+                title: 'Updated Title',
+                body: 'Updated body content',
+                userId: 1
+            }
+        });
+        const body = await response.json();
+
+        expect(response.status()).toBe(200);
+        expect(body.title).toBe('Updated Title');
+        expect(body.body).toBe('Updated body content');
+    });
 });
