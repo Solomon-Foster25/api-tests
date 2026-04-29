@@ -43,4 +43,10 @@ test.describe('Posts API', () => {
         expect(body).toHaveProperty('id');
     });
 
+    test('GET non-existent post returns 404', async ({ request }) => {
+        const response = await request.get(`${BASE_URL}/posts/9999`);
+
+        expect(response.status()).toBe(404);
+    });
+    
 });
