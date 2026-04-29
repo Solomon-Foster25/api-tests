@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
-
 test.describe('Todos API', () => {
 
     test('GET all todos returns 200 and valid array', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/todos`);
+        const response = await request.get(`/todos`);
         const body = await response.json();
 
         expect(response.status()).toBe(200);
@@ -17,7 +15,7 @@ test.describe('Todos API', () => {
     });
 
     test('GET single todo returns 200 and correct data', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/todos/1`);
+        const response = await request.get(`/todos/1`);
         const body = await response.json();
 
         expect(response.status()).toBe(200);
@@ -27,7 +25,7 @@ test.describe('Todos API', () => {
     });
 
     test('GET non-existent todo returns 404', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/todos/9999`);
+        const response = await request.get(`/todos/9999`);
 
         expect(response.status()).toBe(404);
     });

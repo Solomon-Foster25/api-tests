@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
-
 test.describe('Posts API', () => {
 
     test('GET all posts returns 200 status', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/posts`);
+        const response = await request.get('/posts');
         const body = await response.json();
         
         expect(response.status()).toBe(200);
@@ -18,7 +16,7 @@ test.describe('Posts API', () => {
     });
 
     test('GET single post returns correct data', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/posts/1`);
+        const response = await request.get(`/posts/1`);
         const body = await response.json();
 
         expect(response.status()).toBe(200);
@@ -29,7 +27,7 @@ test.describe('Posts API', () => {
     });
 
     test('POST creates a new post and returns 201 with id', async ({ request }) => {
-        const response = await request.post(`${BASE_URL}/posts`, {
+        const response = await request.post(`/posts`, {
             data: {
                 title: 'Test Post',
                 body: 'This is a test post',
@@ -44,13 +42,13 @@ test.describe('Posts API', () => {
     });
 
     test('GET non-existent post returns 404', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/posts/9999`);
+        const response = await request.get(`/posts/9999`);
 
         expect(response.status()).toBe(404);
     });
 
     test('POST with missing required fields returns 400', async ({ request }) => {
-        const response = await request.post(`${BASE_URL}/posts`, {
+        const response = await request.post(`/posts`, {
             data: {}
         });
 
@@ -58,7 +56,7 @@ test.describe('Posts API', () => {
     });
 
     test('PUT updates a post and returns updated data', async ({ request }) => {
-        const response = await request.put(`${BASE_URL}/posts/1`, {
+        const response = await request.put(`/posts/1`, {
             data: {
                 id: 1,
                 title: 'Updated Title',
@@ -74,7 +72,7 @@ test.describe('Posts API', () => {
     });
 
     test('DELETE a post returns 200', async ({ request }) => {
-        const response = await request.delete(`${BASE_URL}/posts/1`);
+        const response = await request.delete(`/posts/1`);
 
         expect(response.status()).toBe(200);
     });

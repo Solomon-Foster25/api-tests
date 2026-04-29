@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
-
 test.describe('Users API', () => {
 
     test('GET all users returns 200 and valid array with correct properties', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/users`);
+        const response = await request.get(`/users`);
         const body = await response.json();
 
         expect(response.status()).toBe(200);
@@ -18,7 +16,7 @@ test.describe('Users API', () => {
     });
 
     test('GET single user returns 200 and correct user data', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/users/1`);
+        const response = await request.get(`/users/1`);
         const body = await response.json(); 
 
         expect(response.status()).toBe(200);
@@ -29,7 +27,7 @@ test.describe('Users API', () => {
     });
 
     test('GET posts by a specific user returns 200 and non-empty array', async ({ request }) => {
-        const response = await request.get(`${BASE_URL}/users/1/posts`);
+        const response = await request.get(`/users/1/posts`);
         const body = await response.json(); 
 
         expect(response.status()).toBe(200);
