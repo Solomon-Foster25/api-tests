@@ -72,4 +72,10 @@ test.describe('Posts API', () => {
         expect(body.title).toBe('Updated Title');
         expect(body.body).toBe('Updated body content');
     });
+
+    test('DELETE a post returns 200', async ({ request }) => {
+        const response = await request.delete(`${BASE_URL}/posts/1`);
+
+        expect(response.status()).toBe(200);
+    });
 });
