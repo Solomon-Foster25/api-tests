@@ -48,5 +48,12 @@ test.describe('Posts API', () => {
 
         expect(response.status()).toBe(404);
     });
-    
+
+    test('POST with missing required fields returns 400', async ({ request }) => {
+        const response = await request.post(`${BASE_URL}/posts`, {
+            data: {}
+        });
+
+        expect(response.status()).toBe(400);
+    });
 });
